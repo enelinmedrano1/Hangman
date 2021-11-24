@@ -1,5 +1,5 @@
 #include <stdio.h>       HELLOOOOOO ENELIN! :) WE'RE GOING TO FIGURE THIS OUT!
-#include <string.h>      HELLOOOOOO SAI
+#include <string.h>      HELLOOOOOO SAI Let's use GitHub
 #include <stdlib.h>  // for call to rand() and srand()
 #include <time.h>   // for call to time() in srand(time(NULL))
 
