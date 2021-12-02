@@ -13,8 +13,8 @@ void read_random_word(char fname[]);
 void game_time(int level);
 
 int main(){
-    int level;
-    char enter;
+    int level, len, wrong_guesses = MAX_WRONG;
+    char enter, hidden[50], revealed[50], user_letter, u_letter, used_letters[50], current[50];
     if (DEBUG == 1) {
         srand(1);  // the same sequence of random numbers will be generated for each run
     }
