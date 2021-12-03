@@ -1,7 +1,10 @@
+//Rallabandi, Sai Tejaswini
+//Medrano, Enelin
+
 #include <stdio.h>
 #include <string.h>
-#include <stdio.h>       
-#include <string.h>      
+#include <stdio.h>
+#include <string.h>
 #include <stdlib.h>  // for call to rand() and srand()
 #include <time.h>   // for call to time() in srand(time(NULL))
 
@@ -10,7 +13,16 @@
 
 int play_session(int level);
 void read_random_word(char fname[]);
-void game_time(int level);
+void game_time_easy(int errorNum);
+
+void drawHead();
+void drawTopBody();
+void drawMidBody();
+void drawBottomBody();
+void rightArm();
+void leftArm();
+void rightLeg();
+void leftLeg();
 
 int main(){
     int level, len, wrong_guesses = MAX_WRONG;
@@ -38,7 +50,8 @@ int play_session(int level){
             exit(0);
         case 1:
             read_random_word("easy.txt");
-            game_time(level);
+            if (level==1)
+            game_time_easy(errorNum);
             break;
         case 2:
             read_random_word("medium.txt");
@@ -67,11 +80,123 @@ void read_random_word(char fname[]){
     printf("-----hidden word: |%s|\n\n\n\n\n\n\n\n\n", word);
     fclose(fp);
 }
-void game_time(int level){
-     printf("Level: %d\n\n\n", level);
-     printf("------|\n");
-     printf("|     |\n");
-     printf("|\n|\n|\n|\n|\n|\n");
-     printf("-----------\n");
 
+void game_time_easy(int errorNum){
+     printf("Level = Easy, Error Number: %d\n\n\n", errorNum);
+
+     //printf("|\n|\n|\n|\n|\n|\n");
+     // switch(error)
+     switch(errorNum)
+     {
+        case 1:
+         {
+          printf("------|\n"); break;
+         }
+
+        case 2:
+         {
+     printf("|     |\n"); break;
+         }
+       case 3:
+         {
+             drawHead(); break;
+         }
+       case 4:
+         {
+              drawHead();  drawTopBody();
+              drawMidBody();
+              drawBottomBody();
+           break;
+        }
+       case 5:
+         {
+           drawHead();  drawTopBody();
+          drawMidBody();
+             break;
+         }
+        case 6:
+         {
+           drawHead();  drawTopBody();
+          drawMidBody();
+           drawBottomBody();
+             break;
+         }
+         case 7:
+         {
+              drawHead();  drawTopBody();
+              leftArm();
+     drawBottomBody();
+           break;
+        }
+         case 8:
+         {
+              drawHead();  drawTopBody();
+              rightArm();
+              drawBottomBody();
+           break;
+        }
+         case 9:
+         {
+              drawHead();  drawTopBody();
+              rightArm();
+              drawBottomBody();
+              leftLeg();
+           break;
+        }
+        case 10:
+         {
+              drawHead();  drawTopBody();
+              rightArm();
+              drawBottomBody();
+              rightLeg();
+           break;
+        }
+     }
+
+     //rightArm();
+    // leftArm();
+     //rightLeg();
+    // leftLeg();
+     printf("-----------\n");
 }
+
+void drawHead()
+{
+  printf("|     O\n");
+}
+
+void drawTopBody()
+{
+  printf("|     |\n");
+}
+
+void drawMidBody()
+{
+  printf("|     |\n");
+}
+
+void drawBottomBody()
+{
+  printf("|     |\n");
+}
+
+void rightArm()
+{
+      printf("|    /|\\\n");
+}
+
+void leftArm()
+{
+      printf("|    /|\n");
+}
+
+void rightLeg()
+{
+      printf("|    / \\\n");
+}
+
+void leftLeg()
+{
+      printf("|    /\n");
+}
+
