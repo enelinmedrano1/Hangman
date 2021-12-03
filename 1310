@@ -1,5 +1,10 @@
+
+/* Enelin Medrano
+   This program plays hangman.
+   */
 //Rallabandi, Sai Tejaswini
 //Medrano, Enelin
+
 
 #include <stdio.h>
 #include <string.h>
@@ -12,6 +17,11 @@
 #define MAX_WRONG 6
 
 int play_session(int level);
+void set_hidden_word(int level, char hidden[]);
+void set_revealed_word(char hidden[], char revealed[], char enter);
+void print_scaffold(int wrong_guesses);
+int win_or_loss();
+int session_score();
 void read_random_word(char fname[]);
 void game_time_easy(int errorNum);
 
@@ -23,6 +33,7 @@ void rightArm();
 void leftArm();
 void rightLeg();
 void leftLeg();
+
 
 int main(){
     int level, len, wrong_guesses = MAX_WRONG;
@@ -38,6 +49,8 @@ int main(){
     scanf("%d", &level );
     while (level!=0){
         play_session(level);
+        print_scaffold(wrong_guesses);
+        set_revealed_word(hidden, revealed, enter);
         printf("Choose difficulty level (exit the game: 0, easy: 1, medium: 2, hard: 3): ");
         scanf("%d", &level);
     }
@@ -49,37 +62,123 @@ int play_session(int level){
         case 0:
             exit(0);
         case 1:
+
+            set_hidden_word(level,"easy.txt");
+
             read_random_word("easy.txt");
             if (level==1)
             game_time_easy(errorNum);
+
             break;
         case 2:
-            read_random_word("medium.txt");
-            game_time(level);
+            set_hidden_word(level,"medium.txt");
             break;
         case 3:
-            read_random_word("hard.txt");
-            game_time(level);
+            set_hidden_word(level,"hard.txt");
             break;
         }
     }
-void read_random_word(char fname[]){
-     int number, index;
+void set_hidden_word(int level, char hidden[]){
+     int number, idx;
      char word[50];
-     FILE * fp = fopen(fname, "r+");
+     FILE * fp = fopen(hidden, "r+");
      if (fp==NULL){
-        printf("Failed to open file %s\n", fname);
+        printf("Failed to open file %s\n", hidden);
         return;
     }
     fscanf(fp, "%d", &number);
-    index = rand()%number;
-    for(int k = 0; k<=index; k++){
+    idx = rand()%number;
+    for(int k = 0; k<=idx; k++){
         fscanf(fp, "%s", word);
         }
-    printf("rand index = %d\n", index);
-    printf("-----hidden word: |%s|\n\n\n\n\n\n\n\n\n", word);
+    printf("rand index = %d\n", idx);
+    printf("----hidden word: |%s|\n\n\n\n\n\n\n\n\n", word);
     fclose(fp);
+    printf("Level: %d\n\n\n", level);
 }
+void set_revealed_word(char hidden[], char revealed[], char enter){
+     printf("Used letters: \n");
+     printf("Number of bad guesses: %d (out of 6)\n", 0);
+     printf("-----\n\n");
+     printf("Enter a letter: ");
+     scanf(" %c ", &enter);
+     //didn't understand the logic of this function.
+}
+
+void print_scaffold(int wrong_guesses){
+     printf("------|\n");
+     printf("|     |\n");
+     printf("|\n|\n|\n|\n|\n|\n");
+     printf("-----------\n");
+     /*if(wrong_guesses ==0){
+          printf("------|\n");
+          printf("|     |\n");
+          printf("|\n|\n|\n|\n|\n|\n");
+          printf("-----------\n");
+     }
+       else{
+       switch(wrong_guesses){
+       case 1:
+       printf("------|\n");
+       printf("|     |\n");
+       printf("|     o\n|\n|\n|\n|\n|\n");
+       printf("-----------\n");
+       break;
+       case 2:
+       printf("------|\n");
+       printf("|     |\n");
+       printf("|     o\n|     |\n|     |\n|     |\n|\n|\n");
+       printf("-----------\n");
+       break;
+       case 3:
+       printf("------|\n");
+       printf("|     |\n");
+       printf("|     o\n|     |\n|    /|\n|     |\n|\n");
+       printf("-----------\n");
+       break;
+       case 4:
+       printf("------|\n");
+       printf("|     |\n");
+       printf("|     o\n|     |\n|    /|\\\n|     |\n|\n");
+       printf("-----------\n");
+       break;
+       case 5:
+       printf("------|\n");
+       printf("|     |\n");
+       printf("|     o\n|     |\n|    /|\\\n|     |\n|    /\n");
+       printf("-----------\n");
+       break;
+       case 6:
+       printf("------|\n");
+       printf("|     |\n");
+       printf("|     o\n|     |\n|    /|\\\n|     |\n|    / \\\n");
+       printf("-----------\n");
+       break;
+       }
+    }*/
+}
+int win_or_loss(){ //char revealed[] as parameter?
+     /*int play;
+       if(word is guessed){ don't know how to code that
+       printf("You won!");
+       else{
+       printf("Sorry. You lost. Better luck next time.\n")
+       printf("The word was: %s", revealed)
+       printf("Do you want to play again? (0-no, 1-yes)")
+       scanf("%d", &play)
+       switch(play)
+       case 0:
+       exit(0);
+       case 1:
+       play_session(level);
+       */
+}
+int session_score(){ //parameters? int level?
+     /* function collects and reads how many times the player played a game and how many times they won a game
+        printf("****************************");
+        printf("*  Session score:  %d/  %d *");
+        printf("****************************")
+     */
 
 void game_time_easy(int errorNum){
      printf("Level = Easy, Error Number: %d\n\n\n", errorNum);
